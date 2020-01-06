@@ -13,6 +13,26 @@ public class Carte {
 	public Carte() {
 
 	}
+	
+	public void setDefault(){/*Definit la taille du tableau en fonction du fichier csv*/
+		try {
+			String chemin = "fichier.csv";
+			BufferedReader fichier_source = new BufferedReader(new FileReader(chemin));
+			String chaine;
+			int nbLigne = 0, nbColonne = 0;
+
+			while ((chaine = fichier_source.readLine()) != null) {
+				nbLigne++;
+				String[] tabChaine = chaine.split(";");
+				String parts[] = tabChaine[0].split(",");
+				nbColonne = parts.length;
+			}
+			carte = new Territoire[nbLigne][nbColonne];
+			fichier_source.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
 
 	public void setMap() {/* Lecture fichier CSV & Affiliation des territoires */
 		try {
@@ -34,12 +54,16 @@ public class Carte {
 				}
 				System.out.println();
 			}
-			System.out.println("nbligne = "+nbLigne+"\t nbColo : "+nbColonne);
+			carte = new Territoire[nbLigne][nbColonne];
 			fichier_source.close();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 
+	}
+	
+	public void disCarte() {
+		System.out.println("ligne : "+carte.length+" Colo "+carte[0].length);
 	}
 
 }

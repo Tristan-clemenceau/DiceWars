@@ -12,6 +12,8 @@ public class TestMain {
 		
 		/*CODE*/
 		j1.jouer();
+		c1.setDefault();
+		c1.disCarte();
 		c1.setMap();
 	}
 
