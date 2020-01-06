@@ -22,10 +22,10 @@ public class Carte {
 			int nbLigne = 0, nbColonne = 0;
 
 			while ((chaine = fichier_source.readLine()) != null) {
-				nbLigne++;
 				String[] tabChaine = chaine.split(";");
 				String parts[] = tabChaine[0].split(",");
 				nbColonne = parts.length;
+				nbLigne++;
 			}
 			carte = new Territoire[nbLigne][nbColonne];
 			fichier_source.close();
@@ -42,19 +42,20 @@ public class Carte {
 			int cpt = 0, nbLigne = 0, nbColonne = 0;
 
 			while ((chaine = fichier_source.readLine()) != null) {
-				nbLigne++;
 				String[] tabChaine = chaine.split(";");
 				String parts[] = tabChaine[0].split(",");
 				nbColonne = parts.length;
-				for (String part : parts) {
-					if (part.toLowerCase().equals("1")) {
+				
+				for(int i = 0 ;i< parts.length;i++) {
+					if (parts[i].toLowerCase().equals("1")) {
+						carte[nbLigne][i] = new Territoire(cpt);
 						cpt++;
+					}else {
+						carte[nbLigne][i] = null;
 					}
-					System.out.print(part + "\t");
 				}
-				System.out.println();
+				nbLigne++;
 			}
-			carte = new Territoire[nbLigne][nbColonne];
 			fichier_source.close();
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -63,7 +64,17 @@ public class Carte {
 	}
 	
 	public void disCarte() {
-		System.out.println("ligne : "+carte.length+" Colo "+carte[0].length);
+		System.out.println("[CARTE]\nNombre ligne : "+carte.length+" Nombre Colonne "+carte[0].length);
+		for (int i = 0; i < carte.length; i++) {
+			for (int j = 0; j < carte[0].length; j++) {
+				if(carte[i][j] == null) {
+					System.out.print("[null]");
+				}else {
+					System.out.print("["+carte[i][j].toString()+"]");
+				}
+			}
+			System.out.println("");
+		}
 	}
 
 }

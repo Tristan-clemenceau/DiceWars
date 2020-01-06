@@ -44,7 +44,7 @@ public class Territoire {
 
 	@Override
 	public String toString() {
-		return "Territoire : "+id+"\t Proprietaire : "+owner.toString();
+		return "Territoire : "+id+"\t Proprietaire : "+owner;
 	}
 
 }
